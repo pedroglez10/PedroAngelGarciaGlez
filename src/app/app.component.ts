@@ -12,7 +12,5 @@ import { ProductService } from './products/services/product/product.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private productService: ProductService) {
-    this.productService.getProducts();
-  }
+
 }

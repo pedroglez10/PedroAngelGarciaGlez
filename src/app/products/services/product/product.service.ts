@@ -31,4 +31,8 @@ export class ProductService {
         this.products$.next(res);
       });
   }
+
+  addProduct(product: Product) {
+    return this.http.post(`${environment.url_api}/bp/products`, product);
+  }
 }

@@ -1,43 +1,52 @@
 <div class="form-container">
     <h1 class="center">Formulario de Registro</h1>
     <hr>
-    <form action="">
+    <form [formGroup]="form" (ngSubmit)="submitForm($event)">
         <div class="input-section">
             <div>
                 <label>ID</label>
-                <input type="text" name="id" id="id">
+                <input type="text" formControlName="id">
                 <span>ID no válido</span>
-                <span>Este campo es requerido</span>
+                @if (form.controls['id'].hasError('required')) {
+                    <span>Este campo es requerido</span>
+                }
             </div>
             <div>
                 <label>Nombre</label>
-                <input type="text" name="name" id="name">
-                <span>Este campo es requerido</span>
+                <input type="text" formControlName="name">
+                @if (form.controls['name'].hasError('required')) {
+                    <span>Este campo es requerido</span>
+                }
             </div>
             <div>
                 <label>Descripción</label>
-                <input type="text" name="description" id="description">
-                <span>Este campo es requerido</span>
+                <input type="text" formControlName="description">
+                @if (form.controls['description'].hasError('required')) {
+                    <span>Este campo es requerido</span>
+                }
             </div>
             <div>
                 <label>Logo</label>
-                <input type="text" name="logo" id="logo">
-                <span>Este campo es requerido</span>
+                <input type="text" formControlName="logo">
+                @if (form.controls['logo'].hasError('required')) {
+                    <span>Este campo es requerido</span>
+                }
             </div>
             <div>
                 <label>Fecha Liberación</label>
-                <input type="date" name="date_release" id="date_release">
-                <span>Este campo es requerido</span>
+                <input type="date" formControlName="date_release">
+                @if (form.controls['date_release'].hasError('required')) {
+                    <span>Este campo es requerido</span>
+                }
             </div>
             <div>
                 <label>Fecha Revisión</label>
-                <input type="date" disabled name="date_revision" id="date_revision">
-                <span>Este campo es requerido</span>
+                <input type="date" formControlName="date_revision">
             </div>
         </div>
         <div class="button-section">
-            <button>Reiniciar</button>
-            <button>Enviar</button>
+            <button type="button" (click)="resetForm()">Reiniciar</button>
+            <button type="submit" [disabled]="form.invalid">Enviar</button>
         </div>
     </form>
 </div>
