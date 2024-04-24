@@ -1,0 +1,33 @@
+<div class="actions">
+    <input type="search" class="search" placeholder="Search..." [(ngModel)]="search">
+    <button class="add" (click)="goToForm()">Agregar</button>
+</div>
+<div class="list-container">
+    <table class="product-list">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th class="left">Nombre del producto</th>
+                <th class="left">Descripción</th>
+                <th class="left">Fecha de liberación</th>
+                <th class="left">Fecha de reestructuración</th>
+                <th class="left"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of products | filterProducts: search; track product.id) {
+                <tr>
+                    <td><img [src]="product.logo" alt="no-img"></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.date_release | date: 'dd/MM/YYYY'}}</td>
+                    <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <p>{{products?.length}} resultados</p>
+    </div>
+</div>

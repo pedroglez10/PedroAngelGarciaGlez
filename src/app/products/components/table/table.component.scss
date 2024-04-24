@@ -1,0 +1,24 @@
+.list-container {
+    background: white;
+    padding: 15px;
+}
+
+.actions {
+    margin-bottom: 10px;
+
+    .add {
+        float: right;
+    }
+}
+
+table.product-list {
+    width: 100%;
+
+    th.left {
+        text-align: left;
+    }
+
+    td img {
+        width: 80px;
+    }
+} 
