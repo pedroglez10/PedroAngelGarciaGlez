@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product';
 import { DatePipe } from '@angular/common';
@@ -21,12 +21,15 @@ import { DropdownComponent } from '../../../shared/ui/dropdown/dropdown.componen
 })
 export class TableComponent {
   products: Product[] | undefined;
+  product: Product | undefined;
   search: string = ''
   cantRows: number = 5;
+  @ViewChild('deleteProductDialog') deleteProductDialog: ElementRef | undefined;
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private eRef: ElementRef
   ) { 
     this.productService.getProducts();
   }
@@ -39,5 +42,26 @@ export class TableComponent {
 
   goToForm() {
     this.router.navigateByUrl(`/producto`);
+  }
+
+  selectedProduct(product: Product) {
+    this.product = product;
+  }
+
+  deleteSelectedProduct() {
+    this.productService.deleteProduct(this.product?.id!)
+    .subscribe({
+      next: data => {
+        console.log(data)
+      },
+      error: error => {
+        console.log('delete error',error)
+        if (error.status == 200) {
+          this.productService.getProducts();
+          this.deleteProductDialog?.nativeElement.close();
+          alert(error.error.text)
+        }
+      }
+    })
   }
 }

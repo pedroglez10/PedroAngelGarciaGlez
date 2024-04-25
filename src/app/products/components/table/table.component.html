@@ -22,7 +22,7 @@
                     <td>{{product.description}}</td>
                     <td>{{product.date_release | date: 'dd/MM/YYYY'}}</td>
                     <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
-                    <td><app-dropdown [id]="product.id"></app-dropdown></td>
+                    <td (click)="selectedProduct(product)"><app-dropdown [id]="product.id" [dialog]="deleteProductDialog"></app-dropdown></td>
                 </tr>
             }
         </tbody>
@@ -36,3 +36,15 @@
         </select> -->
     </div>
 </div>
+
+<!-- modal delete product -->
+<dialog #deleteProductDialog>
+    <div>
+        ¿Estas seguro de eliminar el producto {{product?.name}}?
+    </div>
+    <hr>
+    <div>
+        <button (click)="deleteProductDialog.close()">Cancelar</button>
+        <button (click)="deleteSelectedProduct()">Confirmar</button>
+    </div>
+</dialog>

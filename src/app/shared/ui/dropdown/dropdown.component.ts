@@ -11,14 +11,15 @@ import { ProductService } from '../../../products/services/product/product.servi
 })
 export class DropdownComponent {
   @Input() id?: string;
+  @Input()
+  dialog!: HTMLDialogElement;
   @ViewChild("dropdownContent")
   dropdown_content!: ElementRef;
   
   constructor(
     private eRef: ElementRef,
     private renderer: Renderer2,
-    private router: Router,
-    private productService: ProductService
+    private router: Router
   ) { }
 
   openActions() {
@@ -31,13 +32,6 @@ export class DropdownComponent {
 
   editProduct() {
     this.router.navigateByUrl(`/producto/${this.id}`);
-  }
-
-  deleteProduct() {
-    this.productService.deleteProduct(this.id!)
-    .subscribe(res => {
-      console.log(res);
-    })
   }
 
   @HostListener('document:click', ['$event'])

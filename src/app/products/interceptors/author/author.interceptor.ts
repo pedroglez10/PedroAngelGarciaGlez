@@ -23,5 +23,5 @@ export const authorInterceptor: HttpInterceptorFn = (req, next) => {
       // Re-throw the error to propagate it further
       return throwError(() => err); 
     })
-  );;
+  );
 };
