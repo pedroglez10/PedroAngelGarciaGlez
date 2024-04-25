@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/header/header.component';
-import { ProductService } from './products/services/product/product.service';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +11,5 @@ import { ProductService } from './products/services/product/product.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  
 }

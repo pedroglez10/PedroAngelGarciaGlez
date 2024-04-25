@@ -6,16 +6,30 @@
             <div>
                 <label>ID</label>
                 <input type="text" formControlName="id">
-                <span>ID no válido</span>
-                @if (form.controls['id'].hasError('required')) {
-                    <span>Este campo es requerido</span>
-                }
+                <span>
+                    @if (form.controls['id'].invalid) {
+                        ID no válido
+                    }
+                    @if (form.controls['id'].hasError('required')) {
+                        (Este campo es requerido)
+                    } @else if (form.controls['id'].hasError('minlength')) {
+                        (Capturar mínimo 3 caracteres)
+                    } @else if (form.controls['id'].hasError('maxlength')) {
+                        (Capturar máximo 10 caracteres)
+                    } @else if (form.controls['id'].hasError('duplicate')) {
+                        (producto existente)
+                    }
+                </span>
             </div>
             <div>
                 <label>Nombre</label>
                 <input type="text" formControlName="name">
                 @if (form.controls['name'].hasError('required')) {
                     <span>Este campo es requerido</span>
+                } @else if (form.controls['name'].hasError('minlength')) {
+                    <span>Capturar mínimo 5 caracteres</span>
+                } @else if (form.controls['name'].hasError('maxlength')) {
+                    <span>Capturar máximo 100 caracteres</span>
                 }
             </div>
             <div>
@@ -23,6 +37,10 @@
                 <input type="text" formControlName="description">
                 @if (form.controls['description'].hasError('required')) {
                     <span>Este campo es requerido</span>
+                } @else if (form.controls['description'].hasError('minlength')) {
+                    <span>Capturar mínimo 10 caracteres</span>
+                } @else if (form.controls['description'].hasError('maxlength')) {
+                    <span>Capturar máximo 200 caracteres</span>
                 }
             </div>
             <div>
@@ -45,7 +63,7 @@
             </div>
         </div>
         <div class="button-section">
-            <button type="button" (click)="resetForm()">Reiniciar</button>
+            <button type="button" (click)="resetForm()" [disabled]="existProduct">Reiniciar</button>
             <button type="submit" [disabled]="form.invalid">Enviar</button>
         </div>
     </form>

@@ -17,17 +17,22 @@
         <tbody>
             @for (product of products | filterProducts: search; track product.id) {
                 <tr>
-                    <td><img [src]="product.logo" alt="no-img"></td>
+                    <td><img [src]="product.logo" alt="no-img" onerror="this.src='./assets/no-img.png'"></td>
                     <td>{{product.name}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.date_release | date: 'dd/MM/YYYY'}}</td>
                     <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
-                    <td></td>
+                    <td><app-dropdown [id]="product.id"></app-dropdown></td>
                 </tr>
             }
         </tbody>
     </table>
     <div>
         <p>{{products?.length}} resultados</p>
+        <!-- <select class="cant-rows" [(ngModel)]="cantRows">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select> -->
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { FormComponent } from './products/components/form/form.component';
 
 export const routes: Routes = [
     {
@@ -7,6 +8,12 @@ export const routes: Routes = [
     },
     {
         path: 'producto',
+        pathMatch: 'full',
+        loadComponent: () => import('./products/components/form/form.component').then(m => m.FormComponent)
+    },
+    {
+        path: 'producto/:id',
+        pathMatch: 'full',
         loadComponent: () => import('./products/components/form/form.component').then(m => m.FormComponent)
     },
     {
