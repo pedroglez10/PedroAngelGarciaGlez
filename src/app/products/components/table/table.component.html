@@ -1,6 +1,6 @@
 <div class="actions">
     <input type="search" class="search" placeholder="Search..." [(ngModel)]="search">
-    <button class="add" (click)="goToForm()">Agregar</button>
+    <button class="add primary" (click)="goToForm()" >Agregar</button>
 </div>
 <div class="list-container">
     <table class="product-list">
@@ -17,7 +17,7 @@
         <tbody>
             @for (product of products | filterProducts: search; track product.id) {
                 <tr>
-                    <td><img [src]="product.logo" alt="no-img" onerror="this.src='./assets/no-img.png'"></td>
+                    <td class="row-logo"><img [src]="product.logo" alt="no-img" onerror="this.src='./assets/no-img.png'"></td>
                     <td>{{product.name}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.date_release | date: 'dd/MM/YYYY'}}</td>
@@ -28,7 +28,14 @@
         </tbody>
     </table>
     <div>
-        <p>{{products?.length}} resultados</p>
+        <p>
+            {{products.length}} 
+            @if (products.length == 1) {
+                resultado
+            } @else {
+                resultados
+            }
+        </p>
         <!-- <select class="cant-rows" [(ngModel)]="cantRows">
             <option value="5" selected>5</option>
             <option value="10">10</option>
@@ -39,12 +46,12 @@
 
 <!-- modal delete product -->
 <dialog #deleteProductDialog>
-    <div>
+    <div class="content">
         ¿Estas seguro de eliminar el producto {{product?.name}}?
     </div>
     <hr>
-    <div>
-        <button (click)="deleteProductDialog.close()">Cancelar</button>
-        <button (click)="deleteSelectedProduct()">Confirmar</button>
+    <div class="button-actions">
+        <button class="secondary" (click)="deleteProductDialog.close()">Cancelar</button>
+        <button class="primary" (click)="deleteSelectedProduct()">Confirmar</button>
     </div>
 </dialog>

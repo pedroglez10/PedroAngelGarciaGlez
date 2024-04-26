@@ -4,15 +4,27 @@
 }
 
 .actions {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     .add {
         float: right;
+        width: 100px;
+        height: 45px;
     }
 }
 
 table.product-list {
     width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: #f7f7f7;
+        height: 50px;
+    }
+
+    tr {
+        border-bottom: 2px solid lightgrey;;
+    }
 
     th.left {
         text-align: left;
@@ -20,5 +32,9 @@ table.product-list {
 
     td img {
         width: 80px;
+    }
+
+    .row-logo {
+        text-align: center;
     }
 } 

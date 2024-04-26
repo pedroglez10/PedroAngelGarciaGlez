@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product/product.service';
@@ -11,7 +11,8 @@ import { Product } from '../../models/product';
   standalone: true,
   imports: [
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
@@ -74,7 +75,6 @@ export class FormComponent {
   submitForm(event: Event) {
     event.preventDefault(); // prevent reload the page
     const product = this.form.getRawValue(); // get form values
-    console.log('existe: '+ this.existProduct)
     if (this.existProduct) {
       this.productService.modifyProduct(product).subscribe((res: any) => {
         this.router.navigateByUrl('/');
@@ -94,7 +94,6 @@ export class FormComponent {
   checkIdProduct() {
     this.productService.verifyProduct(this.id!)
     .subscribe(res => {
-      console.log('existe producto: ' + res)
       this.existProduct = res
       if (res) {
         this.form.controls['id'].disable();

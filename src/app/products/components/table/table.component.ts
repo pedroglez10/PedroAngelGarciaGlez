@@ -20,7 +20,7 @@ import { DropdownComponent } from '../../../shared/ui/dropdown/dropdown.componen
   styleUrl: './table.component.scss'
 })
 export class TableComponent {
-  products: Product[] | undefined;
+  products: Product[] = [];
   product: Product | undefined;
   search: string = ''
   cantRows: number = 5;
