@@ -4,62 +4,74 @@
     <form [formGroup]="form" (ngSubmit)="submitForm($event)">
         <div class="input-section">
             <div class="col-6">
-                <label>ID</label>
-                <input type="text" formControlName="id" [ngClass]="{'input-error': form.controls['id'].invalid}">
-                @if (form.controls['id'].invalid) {
-                    <span class="error">
-                        ID no válido
-                        @if (form.controls['id'].hasError('required')) {
-                            (Este campo es requerido)
-                        } @else if (form.controls['id'].hasError('minlength')) {
-                            (Capturar mínimo 3 caracteres)
-                        } @else if (form.controls['id'].hasError('maxlength')) {
-                            (Capturar máximo 10 caracteres)
-                        } @else if (form.controls['id'].hasError('duplicate')) {
-                            (producto existente)
-                        }
-                    </span>
-                }            
+                <div class="input-group">
+                    <label>ID</label>
+                    <input type="text" formControlName="id" [ngClass]="{'input-error': form.controls['id'].invalid}">
+                    @if (form.controls['id'].invalid) {
+                        <span class="error">
+                            ID no válido
+                            @if (form.controls['id'].hasError('required')) {
+                                (Este campo es requerido)
+                            } @else if (form.controls['id'].hasError('minlength')) {
+                                (Capturar mínimo 3 caracteres)
+                            } @else if (form.controls['id'].hasError('maxlength')) {
+                                (Capturar máximo 10 caracteres)
+                            } @else if (form.controls['id'].hasError('duplicate')) {
+                                (producto existente)
+                            }
+                        </span>
+                    }
+                </div>        
             </div>
             <div class="col-6">
-                <label>Nombre</label>
-                <input type="text" formControlName="name" [ngClass]="{'input-error': form.controls['name'].invalid}">
-                @if (form.controls['name'].hasError('required')) {
-                    <span class="error">Este campo es requerido</span>
-                } @else if (form.controls['name'].hasError('minlength')) {
-                    <span class="error">Capturar mínimo 5 caracteres</span>
-                } @else if (form.controls['name'].hasError('maxlength')) {
-                    <span class="error">Capturar máximo 100 caracteres</span>
-                }
+                <div class="input-group">
+                    <label>Nombre</label>
+                    <input type="text" formControlName="name" [ngClass]="{'input-error': form.controls['name'].invalid}">
+                    @if (form.controls['name'].hasError('required')) {
+                        <span class="error">Este campo es requerido</span>
+                    } @else if (form.controls['name'].hasError('minlength')) {
+                        <span class="error">Capturar mínimo 5 caracteres</span>
+                    } @else if (form.controls['name'].hasError('maxlength')) {
+                        <span class="error">Capturar máximo 100 caracteres</span>
+                    }
+                </div>
             </div>
             <div class="col-6">
-                <label>Descripción</label>
-                <input type="text" formControlName="description" [ngClass]="{'input-error': form.controls['description'].invalid}">
-                @if (form.controls['description'].hasError('required')) {
-                    <span class="error">Este campo es requerido</span>
-                } @else if (form.controls['description'].hasError('minlength')) {
-                    <span class="error">Capturar mínimo 10 caracteres</span>
-                } @else if (form.controls['description'].hasError('maxlength')) {
-                    <span class="error">Capturar máximo 200 caracteres</span>
-                }
+                <div class="input-group">
+                    <label>Descripción</label>
+                    <input type="text" formControlName="description" [ngClass]="{'input-error': form.controls['description'].invalid}">
+                    @if (form.controls['description'].hasError('required')) {
+                        <span class="error">Este campo es requerido</span>
+                    } @else if (form.controls['description'].hasError('minlength')) {
+                        <span class="error">Capturar mínimo 10 caracteres</span>
+                    } @else if (form.controls['description'].hasError('maxlength')) {
+                        <span class="error">Capturar máximo 200 caracteres</span>
+                    }
+                </div>
             </div>
             <div class="col-6">
-                <label>Logo</label>
-                <input type="text" formControlName="logo" [ngClass]="{'input-error': form.controls['logo'].invalid}">
-                @if (form.controls['logo'].hasError('required')) {
-                    <span class="error">Este campo es requerido</span>
-                }
+                <div class="input-group">
+                    <label>Logo</label>
+                    <input type="text" formControlName="logo" [ngClass]="{'input-error': form.controls['logo'].invalid}">
+                    @if (form.controls['logo'].hasError('required')) {
+                        <span class="error">Este campo es requerido</span>
+                    }
+                </div>
             </div>
             <div class="col-6">
-                <label>Fecha Liberación</label>
-                <input type="date" formControlName="date_release" [ngClass]="{'input-error': form.controls['date_release'].invalid}">
-                @if (form.controls['date_release'].hasError('required')) {
-                    <span class="error">Este campo es requerido</span>
-                }
+                <div class="input-group">
+                    <label>Fecha Liberación</label>
+                    <input type="date" formControlName="date_release" [ngClass]="{'input-error': form.controls['date_release'].invalid}">
+                    @if (form.controls['date_release'].hasError('required')) {
+                        <span class="error">Este campo es requerido</span>
+                    }
+                </div>
             </div>
             <div class="col-6">
-                <label>Fecha Revisión</label>
-                <input type="date" formControlName="date_revision">
+                <div class="input-group">
+                    <label>Fecha Revisión</label>
+                    <input type="date" formControlName="date_revision">
+                </div>
             </div>
         </div>
         <div class="button-section">
