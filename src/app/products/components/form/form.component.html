@@ -64,6 +64,8 @@
                     <input type="date" formControlName="date_release" [ngClass]="{'input-error': form.controls['date_release'].invalid}">
                     @if (form.controls['date_release'].hasError('required')) {
                         <span class="error">Este campo es requerido</span>
+                    }  @else if (form.controls['date_release'].hasError('invalid_date')) {
+                        <span class="error">No es posible seleccionar una fecha menor a la actual</span>
                     }
                 </div>
             </div>
@@ -75,7 +77,7 @@
             </div>
         </div>
         <div class="button-section">
-            <button type="button" class="secondary" (click)="resetForm()" [disabled]="existProduct">Reiniciar</button>
+            <button type="button" class="secondary" (click)="resetForm()">Reiniciar</button>
             <button type="submit" class="send primary" [disabled]="form.invalid">Enviar</button>
         </div>
     </form>

@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product/product.service';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs';
 import { Product } from '../../models/product';
 
 @Component({
@@ -21,6 +20,7 @@ export class FormComponent {
   form!: FormGroup;
   @Input() id?: string;
   existProduct: boolean = false;
+  product: Product | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,6 +53,14 @@ export class FormComponent {
         const newDate = new Date(value); // create object date
 
         newDate.setDate(newDate.getDate() + 1); // add 1 day
+
+        // validate date greater than or equal to current date
+        if (!this.validateDate(newDate)) {
+          this.form.controls['date_release'].setErrors({'invalid_date': true});
+          this.form.controls['date_revision'].setValue(null)
+          return;
+        }
+
         newDate.setFullYear(newDate.getFullYear() + 1); // add 1 year
 
         date_revision = formatDate(newDate, 'yyyy-MM-dd', 'en'); // format date
@@ -61,6 +69,7 @@ export class FormComponent {
       this.form.controls['date_revision'].setValue(date_revision)
     })
 
+    // validate existing ID
     if (!this.id) {
       this.form.controls['id'].valueChanges.subscribe(value => {
         this.productService.verifyProduct(value)
@@ -84,11 +93,13 @@ export class FormComponent {
         this.router.navigateByUrl('/');
       });
     }
-    
   }
 
   resetForm() {
-    this.form.reset();
+    if (!this.id) // adding form
+      this.form.reset(); // clean form
+    else // updating form
+      this.form.patchValue(this.product!) // set form with previous data
   }
 
   checkIdProduct() {
@@ -99,15 +110,41 @@ export class FormComponent {
         this.form.controls['id'].disable();
 
         this.productService.products$.subscribe((res: Product[]) => {
-          console.log(res)
           const product = res.filter((p: any) => p.id === this.id)
-          console.log(product)
-          if (product)
+          if (product){
+            this.product = product[0];
             this.form.patchValue(product[0])
+          }
         })
       } else {
         this.router.navigateByUrl('/');
       }
     })
+  }
+
+  validateDate(date: Date): boolean {
+    const currentdate = new Date();
+    date.setHours(0,0,0,0);
+    currentdate.setHours(0,0,0,0);
+    
+    if (!this.id) { // adding form
+      if (date < currentdate)
+        return false;
+      else
+      return true;
+    } else { // updating form
+      const productdate = new Date(this.product!.date_release);
+      productdate.setDate(productdate.getDate() + 1); // add 1 day
+      productdate.setHours(0,0,0,0);
+
+      if (productdate.getTime() != date.getTime()) { // validate if product date change
+        if (date < currentdate)
+          return false;
+        else
+          return true;
+      } else {
+        return true;        
+      }
+    }
   }
 }
