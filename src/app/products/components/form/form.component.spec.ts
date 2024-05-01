@@ -51,7 +51,7 @@ describe('FormComponent', () => {
     expect(component.form.controls['date_release'].hasError('required')).toBeTruthy();
   });
 
-  it('Check DATE_REVISION desible', () => {
+  it('Check DATE_REVISION disabled', () => {
     expect(component.form.controls['date_revision'].disabled).toBeTruthy();
   });
 });
